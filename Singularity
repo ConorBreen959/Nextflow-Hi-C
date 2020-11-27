@@ -2,7 +2,7 @@ BootStrap: docker
 From: ubuntu:latest
 
 %labels
-    PROJECT RNA-Seq-1.0
+    PROJECT HiC-Pro
 
 %pre
     apt-get install -y debootstrap
@@ -20,7 +20,7 @@ From: ubuntu:latest
     
     # install anaconda
     if [ ! -d /usr/local/anaconda ]; then
-       wget https://repo.continuum.io/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh \
+       wget https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh \
        	    -O ~/anaconda.sh && \
 	    bash ~/anaconda.sh -b -p /usr/local/anaconda && \
 	    rm ~/anaconda.sh
@@ -46,10 +46,10 @@ From: ubuntu:latest
     # Python and relevant libraries
     echo "Installing Python ... "
     conda install -y -c conda-forge python=3.7
-    conda install -y -c anaconda scipy 
+    conda install -y -c anaconda scipy
     conda install -y -c anaconda numpy
     conda install -y -c bcbio bx-python
-    conda install -y -c bioconda pysam 
+    conda install -y -c bioconda pysam
 
     # Install R and relevant packages
     echo "Installing R ... "
@@ -64,10 +64,9 @@ From: ubuntu:latest
    
     # Install HiC-pro
     echo "Installing latest HiC-Pro release ..."
-    VERSION="devel"
-    echo $VERSION".zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && unzip hicpro_latest.zip
+    wget http://raw.githubusercontent.com/ConorBreen959/Nextflow-Hi-C/main/HiC-Pro.zip && unzip HiC-Pro.zip
     
-    cd $(echo HiC-Pro-$VERSION)
+    cd HiC-Pro
     make configure
     make install
  

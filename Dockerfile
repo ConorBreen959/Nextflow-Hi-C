@@ -1,8 +1,7 @@
 FROM ubuntu:18.04
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-LABEL authors="Nicolas Servant" \
-      description="Docker image containing all requirements for the HiC-Pro pipeline"
+LABEL description="Docker image containing all requirements for the HiC-Pro pipeline"
 
 ## Install system tools
 RUN apt-get update \
@@ -28,12 +27,12 @@ ENV PATH /usr/local/anaconda/envs/HiC-Pro_v3.0.0/bin:$PATH
 
 ## Install HiCPro
 RUN cd /tmp && \
-    echo "devel.zip" | wget --base=http://github.com/nservant/HiC-Pro/archive/ -i - -O hicpro_latest.zip && \
-    unzip hicpro_latest.zip && \
-    cd HiC-Pro-devel  && \ 
+    echo "devel.zip" | wget https://raw.githubusercontent.com/ConorBreen959/Nextflow-Hi-C/main/HiC-Pro.zip && \
+    unzip HiC-Pro.zip && \
+    cd HiC-Pro  && \ 
     make configure prefix=/ && \
     make install && \
     cd .. && \
     rm -fr HiC-Pro*
 
-RUN /HiC-Pro_3.0.0/bin/HiC-Pro -h
+RUN /HiC-Pro/bin/HiC-Pro -h

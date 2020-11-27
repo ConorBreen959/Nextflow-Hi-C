@@ -1,0 +1,11 @@
+
+#########################################################################
+## Paths and Settings  - Start editing here !
+#########################################################################
+
+PREFIX = /usr/bin
+BOWTIE2_PATH = /usr/bin/bowtie2
+SAMTOOLS_PATH = /usr/bin/samtools
+R_PATH = /home/conor/anaconda3/bin
+PYTHON_PATH = /usr/bin/python2
+CLUSTER_SYS = 
